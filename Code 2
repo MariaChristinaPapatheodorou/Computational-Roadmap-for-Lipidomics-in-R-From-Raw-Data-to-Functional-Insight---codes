@@ -1,0 +1,10 @@
+# Example of QC filtering and normalization using lipidr
+library(lipidr)
+# Create a LipidomicsExperiment object (assuming data is already tidied)
+lipid_ex <- as_lipidomics_experiment(clean_data)
+# Filter lipids with high CV in QC samples (> 30%)
+lipid_ex <- filter_low_cv(lipid_ex, measure = "Area", threshold = 0.3)
+# Perform PQN normalization
+lipid_ex_norm <- normalize_pqn(lipid_ex, measure = "Area")
+# Visualizing the effect of normalization
+plot_samples(lipid_ex_norm, measure = "Area", type = "boxplot")
