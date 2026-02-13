@@ -1,0 +1,19 @@
+# Load core suites for lipid data wrangling
+library(readr)   # Fast data import
+library(dplyr)   # Data manipulation 
+library(ggplot2) # Visualization
+# Step 1: Import lipidomics dataset
+lipid_data <- read_csv("lipidomics_dataset.csv")
+# Step 2: Quality control and cleaning
+clean_data <- lipid_data %>%
+  filter(!is.na(intensity)) %>%            # Remove missing values
+  mutate(log_intensity = log10(intensity + 1)) %>% 
+  group_by(lipid_class) %>%                # Aggregate by class
+  summarise(mean_log_intensity = mean(log_intensity, na.rm = TRUE))
+# Step 3: Visualization of class-level distribution
+ggplot(clean_data, aes(x = lipid_class, y = mean_log_intensity, fill = lipid_class)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Average Lipid Intensity per Class", 
+       x = "Lipid Class", y = "Mean log10(Intensity)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
