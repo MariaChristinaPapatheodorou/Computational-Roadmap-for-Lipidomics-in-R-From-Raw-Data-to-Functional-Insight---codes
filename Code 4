@@ -1,0 +1,5 @@
+library(lipidr)
+# Identify significantly altered lipids between groups
+lipid_result <- differential_lipids(lipid_data, group_column = "Treatment")
+# Generate a volcano plot to visualize significant changes
+volcano_plot(lipid_result)
