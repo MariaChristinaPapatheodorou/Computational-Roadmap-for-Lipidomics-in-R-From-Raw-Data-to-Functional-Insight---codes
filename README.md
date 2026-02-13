@@ -5,3 +5,13 @@ Implementation of a reproducible data cleaning and exploratory visualization pip
 
 # Code 2
 Quality control filtering and normalization pipeline using specialized lipidomics packages. This implementation demonstrates the transition from raw feature tables to a normalized LipidomicsExperiment object. The script utilizes lipidr to execute a rig-orous QC filter, removing features with a CV > 30% in pooled QC samples to eliminate unstable variables. Subsequently, it applies Probabilistic Quotient Normalization (PQN) to stabilize the dataset against concentration-induced variations. The workflow concludes with a boxplot-based assessment (plot_samples), providing a visual confir-mation of variance stabilization across the sample cohort.
+
+# Code 3
+Calculation of diversity metrics and ordination. This implementation leverages the vegan package to quantify lipidome diversity. The Shannon index provides a measure of molecular richness, while the NMDS ordination visualizes sample clustering based on compositional similarity, offering a high-level view of group-specific lipidomic sig-natures.
+
+# Code 4
+Differential analysis and significance visualization. This script utilizes lipidr to execute differential abundance testing. The resulting volcano plot maps the magnitude of change (log2 Fold Change) against statistical significance, facilitating the rapid priori-tization of candidate biomarkers.
+
+# Code 5
+Implementation of functional enrichment analysis. This implementation demonstrates the use of clusterProfiler to identify enriched biological processes. By mapping signifi-cant lipids to their associated gene sets, the workflow provides a mechanistic view of the cellular state through a high-resolution dotplot.
+library(clusterProfiler)
