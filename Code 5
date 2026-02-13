@@ -1,0 +1,9 @@
+library(clusterProfiler)
+# Functional enrichment analysis using lipid-related gene sets
+enrich_result <- enrichGO(gene = significant_genes, 
+                         OrgDb = org.Hs.eg.db, 
+                         ont = "BP", 
+                         pAdjustMethod = "BH")
+# Visualize the top enriched biological processes
+dotplot(enrich_result, showCategory = 15) + 
+  ggtitle("Functional Enrichment of Lipid Metabolism Pathways")
