@@ -1,0 +1,6 @@
+library(vegan)
+# Calculate Shannon diversity index to assess lipidome richness
+diversity_index <- diversity(lipid_matrix, index = "shannon")
+# Perform NMDS ordination to visualize sample clustering
+ordination <- metaMDS(lipid_matrix, distance = "bray")
+plot(ordination, main = "NMDS of Lipidomic Profiles")
