@@ -1,4 +1,4 @@
-# Computational-Roadmap-for-Lipidomics-in-R-codes
+# A Structured Computational Roadmap for Lipidomics in R: Reproducible Workflows from Raw Data to Functional Insight -codes
 This repository contains the R source code and computational workflows accompanying the review article: **"Integrated R-based Lipidomics Workflow: From Raw Data to Functional Insight"**. 
 The provided scripts offer a modular and reproducible framework for processing, analyzing, and interpreting high-throughput lipidomics data within the R/Bioconductor ecosystem.
 
