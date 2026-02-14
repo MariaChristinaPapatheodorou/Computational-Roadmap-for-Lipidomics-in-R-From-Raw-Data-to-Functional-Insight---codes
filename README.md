@@ -23,7 +23,7 @@ ________________________________________________________________________________
 
 Code 1: Preprocessing & Exploratory Analysis
 
-Implementation of a reproducible data cleaning and exploratory visualization pipeline. This script outlines a standardized workflow for the initial processing of lipidomic datasets using the tidyverse ecosystem.```
+Implementation of a reproducible data cleaning and exploratory visualization pipeline. This script outlines a standardized workflow for the initial processing of lipidomic datasets using the tidyverse ecosystem.
 
 Code 2: QC Filtering & Normalization
 
