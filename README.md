@@ -16,7 +16,7 @@ You can install the necessary Bioconductor packages using:
 if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 BiocManager::install(c("lipidr", "clusterProfiler", "MSnbase"))
 install.packages(c("tidyverse", "vegan"))
-
+____________________________________________________________________________________________________________________
 # Code 1: Preprocessing & Exploratory Analysis
 Implementation of a reproducible data cleaning and exploratory visualization pipe-line. This script outlines a standardized workflow for the initial processing of lipidomic datasets using the tidyverse ecosystem. The pipeline initiates with high-speed data in-gestion via the readr package, followed by a sequential series of operations linked by the pipe operator (%>%). Key steps include: 1.Feature Filtration: The removal of in-complete observations (NAs) to maintain data integrity. 2.Variance Stabilization: Ap-plication of a log_{10} transformation to mitigate heteroscedasticity and normalize the intensity distribution. 3. Class-level Aggregation: Utilizing group_by and summarise to collapse individual lipid species into broader biological classes for trend identification.
 
