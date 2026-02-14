@@ -19,7 +19,7 @@ BiocManager::install(c("lipidr", "clusterProfiler", "MSnbase"))
 install.packages(c("tidyverse", "vegan"))
 ```
 _________________________________________________________________________________________________________________________________________________________________
-📂 Code Modules Overview
+## 📂 Code Modules Overview
 
 Code 1: Preprocessing & Exploratory Analysis
 
