@@ -1,5 +1,22 @@
-# Computational-Roadmap-for-Lipidomics-in-R-From-Raw-Data-to-Functional-Insight--codes
-Computational Roadmap for Lipidomics in R: From Raw Data to Functional Insight
+# Computational-Roadmap-for-Lipidomics-in-R-codes
+This repository contains the R source code and computational workflows accompanying the review article: **"Integrated R-based Lipidomics Workflow: From Raw Data to Functional Insight"**. 
+The provided scripts offer a modular and reproducible framework for processing, analyzing, and interpreting high-throughput lipidomics data within the R/Bioconductor ecosystem.
+
+## 🛠 Prerequisites & Dependencies
+
+To ensure reproducibility, this workflow requires **R (version >= 4.0)**. The following packages must be installed:
+
+* **Data Manipulation:** `tidyverse` (dplyr, readr, ggplot2)
+* **Lipidomics Core:** `lipidr`, `MSnbase`
+* **Functional Analysis:** `clusterProfiler`
+* **Ecology & Diversity:** `vegan`
+
+You can install the necessary Bioconductor packages using:
+```R
+if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+BiocManager::install(c("lipidr", "clusterProfiler", "MSnbase"))
+install.packages(c("tidyverse", "vegan"))
+
 # Code 1: Preprocessing & Exploratory Analysis
 Implementation of a reproducible data cleaning and exploratory visualization pipe-line. This script outlines a standardized workflow for the initial processing of lipidomic datasets using the tidyverse ecosystem. The pipeline initiates with high-speed data in-gestion via the readr package, followed by a sequential series of operations linked by the pipe operator (%>%). Key steps include: 1.Feature Filtration: The removal of in-complete observations (NAs) to maintain data integrity. 2.Variance Stabilization: Ap-plication of a log_{10} transformation to mitigate heteroscedasticity and normalize the intensity distribution. 3. Class-level Aggregation: Utilizing group_by and summarise to collapse individual lipid species into broader biological classes for trend identification.
 
