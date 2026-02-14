@@ -1,5 +1,19 @@
 library(lipidr)
-# Identify significantly altered lipids between groups
-lipid_result <- differential_lipids(lipid_data, group_column = "Treatment")
-# Generate a volcano plot to visualize significant changes
-volcano_plot(lipid_result)
+library(limma)
+# 1. Define Design Matrix (Accounting for Group and Batch/Covariates)
+# Assuming 'Group' is our main condition and 'Batch' is a confounder
+design <- model.matrix(~ Group + Batch, data = colData(lipid_ex_norm))
+# 2. Perform Differential Analysis using a Linear Model framework
+# The 'de_analysis' function in lipidr wraps limma for robust inference
+de_results <- de_analysis(
+  lipid_ex_norm, 
+  design = design, 
+  coef = "GroupTreatment" # Specify the comparison of interest
+)
+# 3. Apply Multiple Testing Correction (FDR/Benjamini-Hochberg)
+# lipidr performs this internally, but we can extract and filter
+significant_lipids <- de_results %>%
+  filter(adj.P.Val < 0.05 & abs(logFC) > 1)
+# 4. Visualization: Enhanced Volcano Plot
+# Mapping Log2 Fold Change vs -Log10 Adjusted P-value
+plot_results(de_results, type = "volcano", p_threshold = 0.05)
