@@ -1,0 +1,49 @@
+# -------------------------------------------------------------------------
+# VALIDATION CASE STUDY: Integrated Lipidomics Roadmap
+# Description: This script demonstrates the practical application of the 
+# roadmap using a synthetic dataset to ensure full reproducibility.
+# -------------------------------------------------------------------------
+# 1. Load Required Libraries
+library(lipidr)
+library(ggplot2)
+library(limma) # Direct limma integration for maximum stability
+# 2. Data Ingestion & Formatting (Roadmap Step 1)
+# Generating a synthetic dataset with LION-compliant lipid nomenclature
+set.seed(123)
+lipids <- c("PC(32:0)", "PC(34:1)", "PC(36:2)", "PE(32:0)", "PE(34:1)", 
+            "TG(50:1)", "TG(52:2)", "TG(54:3)")
+intensities <- matrix(runif(80, 100, 1000), nrow = 8)
+colnames(intensities) <- paste0("Sample_", 1:10)
+df_input <- data.frame(Molecule = lipids, intensities)
+# Convert to LipidomicsExperiment S4 object (Standard Bioconductor architecture)
+li_exp <- as_lipidomics_experiment(df_input)
+# 3. Quality Control & Normalization (Roadmap Step 2)
+# Applying Probabilistic Quotient Normalization (PQN) to reduce technical variance
+li_exp_norm <- normalize_pqn(li_exp, measure = "Area")
+# 4. Statistical Prioritization & Biomarker Discovery (Roadmap Step 4)
+# Direct implementation of the Linear Models for Microarrays (limma) engine
+# extracting the normalized matrix for high-performance testing
+mat <- assay(li_exp_norm)
+group <- factor(rep(c("Control", "Disease"), each = 5))
+# Constructing the Design Matrix and applying empirical Bayes moderation
+design <- model.matrix(~ group)
+fit <- lmFit(log2(mat + 1), design) # Log2 transformation for variance stabilization
+fit <- eBayes(fit)
+# Extracting statistical metrics for the prioritizing significant species
+df_results <- topTable(fit, coef = 2, number = Inf)
+df_results$Molecule <- rownames(df_results)
+# 5. Data Visualization (Roadmap Step 6)
+# Generating a volcano plot to differentiate biological from statistical significance
+ggplot(df_results, aes(x = logFC, y = -log10(P.Value))) + 
+  geom_point(aes(color = P.Value < 0.05), size = 3) + 
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "darkgrey") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "darkgrey") +
+  scale_color_manual(values = c("black", "red")) +
+  theme_minimal() + 
+  labs(title = "Roadmap Validation: Differential Abundance", 
+       subtitle = "Calculated via direct Limma-integration for analytical stability",
+       x = "log2 Fold Change (Disease vs Control)", 
+       y = "-log10 p-value",
+       color = "Statistically Significant (p < 0.05)")
+# 6. Functional Interpretation (Roadmap Step 5)
+# In practice, df_results can be passed to LION-web or lsea() for pathway enrichment.
