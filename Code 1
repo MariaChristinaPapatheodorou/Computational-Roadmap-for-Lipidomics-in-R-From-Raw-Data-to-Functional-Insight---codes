@@ -1,3 +1,4 @@
+# CAUTION: Simple filtering of NAs assumes MAR; for MNAR data, consider quantile regres    sion or LOD-based imputation.
 # Load core suites for lipid data wrangling
 library(readr)   # Fast data import
 library(dplyr)   # Data manipulation 
@@ -6,7 +7,7 @@ library(ggplot2) # Visualization
 lipid_data <- read_csv("lipidomics_dataset.csv")
 # Step 2: Quality control and cleaning
 clean_data <- lipid_data %>%
-  filter(!is.na(intensity)) %>%            # Remove missing values
+  filter(!is.na(intensity) & intensity > 0) %>%            # Remove missing values
   mutate(log_intensity = log10(intensity + 1)) %>% 
   group_by(lipid_class) %>%                # Aggregate by class
   summarise(mean_log_intensity = mean(log_intensity, na.rm = TRUE))
