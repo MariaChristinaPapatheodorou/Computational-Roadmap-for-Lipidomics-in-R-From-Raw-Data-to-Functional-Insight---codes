@@ -40,3 +40,7 @@ Differential analysis and significance visualization. This script utilizes lipid
 Code 5: Functional Enrichment Analysis
 
 Implementation of functional enrichment analysis. This implementation demonstrates the use of clusterProfiler to identify enriched biological processes.
+
+Code 6: Reproducible R Workflow for Roadmap Validation
+
+This executable script demonstrates the end-to-end application of the proposed roadmap, using a synthetic dataset to ensure ana-lytical transparency and computational reproducibility. 
