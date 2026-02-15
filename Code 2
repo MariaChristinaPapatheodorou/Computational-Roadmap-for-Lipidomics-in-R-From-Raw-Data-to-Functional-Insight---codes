@@ -1,8 +1,10 @@
 # Example of QC filtering and normalization using lipidr
+# Input: Tidy data frame with 'Lipid', 'Sample', and 'Intensity' columns. lipidr converts this into a LipidomicsExperiment object, inheriting from SummarizedExperiment.
 library(lipidr)
 # Create a LipidomicsExperiment object (assuming data is already tidied)
 lipid_ex <- as_lipidomics_experiment(clean_data)
 # Filter lipids with high CV in QC samples (> 30%)
+# lipid_ex inherits from SummarizedExperiment, enabling compatibility with Bioconductor workflows
 lipid_ex <- filter_low_cv(lipid_ex, measure = "Area", threshold = 0.3)
 # Perform PQN normalization
 lipid_ex_norm <- normalize_pqn(lipid_ex, measure = "Area")
