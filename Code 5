@@ -1,9 +1,11 @@
 library(clusterProfiler)
+# For lipid-specific functional analysis, we recommend mapping lipids to
+# LION terms or KEGG pathways using the lipidr::enrich_lipid_classes() function.
 # Functional enrichment analysis using lipid-related gene sets
-enrich_result <- enrichGO(gene = significant_genes, 
-                         OrgDb = org.Hs.eg.db, 
-                         ont = "BP", 
-                         pAdjustMethod = "BH")
+enrich_result <- enrichGO(gene = significant_genes,
+OrgDb = org.Hs.eg.db,
+ont = "BP",
+pAdjustMethod = "BH")
 # Visualize the top enriched biological processes
-dotplot(enrich_result, showCategory = 15) + 
-  ggtitle("Functional Enrichment of Lipid Metabolism Pathways")
+dotplot(enrich_result, showCategory = 15) +
+ggtitle("Functional Enrichment of Lipid Metabolism Pathways")
